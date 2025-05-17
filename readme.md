@@ -6,7 +6,7 @@ It evaluates each node sequentially and employs explicit state checkpointing to 
 
 The worst‑case time complexity is currently exponential O(R^n) for R rules over an input of length n due to the combinatorial exploration of grammar nodes and the lack of memoization.
 
-see [todo](./todo) for roadmap.
+See the [todo file](./todo) for roadmap.
 
 # Usage 
 
@@ -44,5 +44,5 @@ AST Dump:
 **any C99 compiler with:**
 - malloc, free
 - printf, fprintf
-- strdup, strcmp, strncmp
+- strdup, strcmp, strncmp, strlen
 - exit

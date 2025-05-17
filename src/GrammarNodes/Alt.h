@@ -21,9 +21,16 @@ Ast* AltNode_match(GrammarNode *this, struct s_Ctx *ctx)
     i = 0;
     while (i < self->size)
     {
+        CtxBackup *bkp = CtxBackup_new(ctx);
+
         Ast *output = GrammarNode_match(self->nodes[i], ctx);
         if (output)
+        {
+            CtxBackup_delete(bkp);
             return output;
+        }
+        CtxBackup_restore(bkp, ctx);
+        CtxBackup_delete(bkp);
         i += 1;   
     }
     return NULL;

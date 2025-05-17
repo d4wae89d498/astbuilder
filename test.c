@@ -21,13 +21,25 @@ int main()
                           term("5"), term("6"), term("7"), term("8"),  term("9")));    
 
     gdef(&y, number, seq(digit, alt(digit, number)));
-    gdef(&y, expr,   seq(number, term("+"), number));
+
+    
+    gdef(&y, expr, alt(
+        seq(number, term("+"), expr),
+        seq(number, term("-"), expr),
+        seq(term("("), expr, term(")"), term("+"), expr),
+        seq(term("("), expr, term(")"), term("-"), expr),
+        seq(term("("), expr, term(")")),
+        number,
+    ));
+
+
+
 
     Ctx ctx = {
         .y = y,
         .ast = NULL,
         .last_rule = "",
-        .source = "23+52"
+        .source = "(23-52)+58"
     };
 
     cmatch(&ctx);

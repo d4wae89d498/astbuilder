@@ -50,7 +50,7 @@ void _Ast_dump(const Ast *node, int depth)
         printf("  "); // Indentation
 
     if (node->value)
-        printf("- %s (%s)\n", node->type, node->value);
+        printf("- %s ('%s')\n", node->type, node->value);
     else 
         printf("- %s \n", node->type);
 

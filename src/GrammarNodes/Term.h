@@ -17,8 +17,6 @@ Ast* TermNode_match(GrammarNode *node, Ctx *ctx)
     TermNode *self = (TermNode*)node;
     size_t len = strlen(self->value);
     
-    printf("%s\n", self->value);
-
     if (strlen(ctx->source + ctx->position) < len) {
         return NULL;
     }

@@ -14,10 +14,10 @@ typedef struct s_Ctx
     char    *last_rule;
 } Ctx;
 
-struct s_CtxBackup 
+typedef struct s_CtxBackup 
 {
     size_t  position;      // Saved position in source
-};
+} CtxBackup;
 
 //////////////////////////////////////////////////////
 
@@ -55,9 +55,6 @@ CtxBackup *CtxBackup_delete(CtxBackup *bkp)
 
 Ast* try_rule(Ctx *self, unsigned i)
 {
-    CtxBackup *bkp = CtxBackup_new(self);
-    if (!bkp) return false;
-
     printf("[trying rule %s...]\n", self->y.rules[i].name);
     self->last_rule = self->y.rules[i].name;
     size_t  begin = self->position;
@@ -95,8 +92,8 @@ void cmatch(Ctx *self)
             i += 1;
         }
 
-        if (!longest_match_node) {   
-            printf("syntax error: no matching rule found at %zu.\n", self->position);
+        if (!longest_match_node || longest_position == 0) {   
+            printf("syntax error: no matching rule found at %zu [%c].\n", self->position, self->source[self->position]);
             break ;
         } 
         Ast_add(&(self->ast), longest_match_node);
