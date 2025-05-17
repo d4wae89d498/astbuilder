@@ -18,13 +18,11 @@ Ast*  RuleNode_match(GrammarNode *node, Ctx *ctx)
     // Find the referenced rule
     for (unsigned i = 0; i < ctx->y.rules_count; i++) {
         if (strcmp(ctx->y.rules[i].name, self->rule_name) == 0) {
-            if (!strcmp(ctx->last_rule, node->name))
-            {
-                fprintf(stderr, "Infinite loop detected in grammar.\n");
-                exit(0);
-            }
             ctx->last_rule = node->name;
-            return ctx->y.rules[i].def->Match(ctx->y.rules[i].def, ctx);
+            Ast *output = GrammarNode_match(ctx->y.rules[i].def, ctx);
+            if (!output)
+                return NULL;
+            return Ast_new((Ast){.type=ctx->y.rules[i].name, .value=NULL, .next = NULL, .child = output});
         }
     }
     return NULL;

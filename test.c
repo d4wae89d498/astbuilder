@@ -8,9 +8,6 @@
 
 #include "Ctx.h"
 
-#define test2(arr) printf("arr of %zu\n", sizeof(arr) / sizeof(arr[0]))
-#define test1(...) test2((GrammarNode*[]) { __VA_ARGS__ })
-
 int main()
 {
     Grammar y = {.rules_count = 0, .terms_count = 0};
@@ -19,27 +16,20 @@ int main()
     term_prop(&y, 0, "=", ASSO_RIGHT);
     term_prop(&y, 1, "+", ASSO_LEFT);
 
-    test1(term("0"));
-
     
-    gdef(&y, digit,  alt(term("0"), 
-                        alt(term("1"),
-                            alt(term("2"),
-                                alt(term("3"),
-                                    alt(term("4"),
-                                        alt(term("5"),
-                                            alt(term("6"),
-                                                alt(term("7"),
-                                                    alt(term("8"), term("9")
+    gdef(&y, digit,  alt( term("0"), term("1"), term("2"), term("3"), term("4"), 
+                          term("5"), term("6"), term("7"), term("8"),  term("9")));    
 
-                    ))))))))));    
-    gdef(&y, number, seq(rule(digit), alt(rule(digit), rule(number))));
+
+    gdef(&y, number, seq(digit, alt(digit, number)));
+    gdef(&y, expr,   seq(number, term("+"), number));
+
 
     Ctx ctx = {
         .y = y,
         .ast = NULL,
         .last_rule = "",
-        .source = "23"
+        .source = "23+52"
     };
 
     cmatch(&ctx);

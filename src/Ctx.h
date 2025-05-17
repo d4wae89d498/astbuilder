@@ -11,8 +11,7 @@ typedef struct s_Ctx
     size_t  position;      // Current position as offset
     Ast     *ast;          // Abstract Syntax Tree
     Grammar y;             // Grammar definition
-    char    *last_rule;    // Used to detect infinite reccursion
-    char    *grammar_rule; // Used to create a 
+    char    *last_rule;
 } Ctx;
 
 struct s_CtxBackup 
@@ -60,9 +59,9 @@ Ast* try_rule(Ctx *self, unsigned i)
     if (!bkp) return false;
 
     printf("[trying rule %s...]\n", self->y.rules[i].name);
-    self->grammar_rule = self->y.rules[i].name;
+    self->last_rule = self->y.rules[i].name;
     size_t  begin = self->position;
-    Ast *output = self->y.rules[i].def->Match(self->y.rules[i].def, self);
+    Ast *output = GrammarNode_match(self->y.rules[i].def, self);
     if (output)
     {
         Ast *what = Ast_new((Ast) {.type=self->y.rules[i].name, .value=NULL,.next=NULL,.child=output});

@@ -6,7 +6,7 @@
 
 # include "Ast.h"
 
-# define gdef(g, name, node) Grammar_add_rule(g, #name, node)
+# define gdef(g, name, node) GrammarNode *name = rule(name); Grammar_add_rule(g, #name, node);
 # define term_prop(g, prec, name, asso) Grammar_add_term(g, name, prec, asso)
 # define MAX_RULES_COUNT   255
 # define MAX_TERMS_COUNT     64

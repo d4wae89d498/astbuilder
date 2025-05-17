@@ -1,0 +1,10 @@
+.vscode
+a.out
+.swp
+.DS_Store
+*.o
+*.a
+*.so
+*.exe
+*.dll
+*.lib

@@ -1,6 +1,5 @@
 {
     "files.associations": {
-        "initializer_list": "c",
-        "cstdlib": "c"
+        "typeinfo": "c"
     }
 }

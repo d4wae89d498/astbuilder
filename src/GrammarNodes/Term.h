@@ -24,10 +24,9 @@ Ast* TermNode_match(GrammarNode *node, Ctx *ctx)
     }
     
     if (strncmp(ctx->source + ctx->position, self->value, len) == 0) {
-        ctx->last_rule = "";
         ctx->position += len;
         return Ast_new((Ast){
-            .type = ctx->grammar_rule,
+            .type = "term",
             .value = self->value,
             .child = NULL,
             .next = NULL

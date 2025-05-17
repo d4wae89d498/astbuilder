@@ -49,7 +49,10 @@ void _Ast_dump(const Ast *node, int depth)
     for (int i = 0; i < depth; ++i)
         printf("  "); // Indentation
 
-    printf("- %s (%s)\n", node->type, node->value);
+    if (node->value)
+        printf("- %s (%s)\n", node->type, node->value);
+    else 
+        printf("- %s \n", node->type);
 
     // Recursively dump child
     if (node->child)
