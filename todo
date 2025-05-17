@@ -1,0 +1,9 @@
+[ ] precedence
+[ ] associativity
+[ ] detect invalid grammars
+[ ] clean error messages
+[ ] coding style (names, proto/impl...)
+[ ] clean memory management
+[ ] support custom lexers (and hence non-CFG)
+[ ] support ast macro (and hence non-CFG)
+[ ] optimisations / meomisations ??

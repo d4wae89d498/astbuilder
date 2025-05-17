@@ -20,10 +20,8 @@ int main()
     gdef(&y, digit,  alt( term("0"), term("1"), term("2"), term("3"), term("4"), 
                           term("5"), term("6"), term("7"), term("8"),  term("9")));    
 
-
     gdef(&y, number, seq(digit, alt(digit, number)));
     gdef(&y, expr,   seq(number, term("+"), number));
-
 
     Ctx ctx = {
         .y = y,
